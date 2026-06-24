@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexara IA Studio — Bio Links</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5mm;
+      position: relative;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: url('fondo_mujer.jpg') center/cover no-repeat;
+      filter: brightness(0.75) blur(3px);
+      z-index: 0;
+    }
+    .overlay {
+      position: fixed;
+      top: 20px;
+      left: 5mm;
+      right: 5mm;
+      bottom: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1;
+      pointer-events: none;
+      border-left: 2px solid rgba(255, 255, 255, 0.08);
+      border-right: 2px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      box-shadow: inset 0 0 60px rgba(255,255,255,0.03), 0 0 8px rgba(255,255,255,0.05);
+    }
+    .bio-container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 380px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .avatar-wrapper {
+      width: 180px;
+      height: 180px;
+      margin-bottom: 20px;
+      position: relative;
+      opacity: 0;
+      transform: scale(0.8);
+      animation: fadeScale 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+    }
+    @keyframes fadeScale { to { opacity: 1; transform: scale(1); } }
+    .avatar {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      border: 5px solid #fff;
+      object-fit: contain;
+      display: block;
+      background: rgba(255,255,255,0.05);
+      padding: 8px;
+      box-shadow: 0 0 0 4px rgba(255,255,255,0.15), 0 12px 40px rgba(0,0,0,0.35);
+    }
+    .avatar-ring {
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: rgba(255,255,255,0.6);
+      border-right-color: rgba(255,255,255,0.3);
+      animation: ringSpin 4s linear infinite;
+    }
+    @keyframes ringSpin { to { transform: rotate(360deg); } }
+    .bio-name {
+      font-size: 28px;
+      font-weight: 800;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.6s ease 0.2s forwards;
+    }
+    .bio-subtitle {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.85);
+      text-align: center;
+      margin-bottom: 30px;
+      letter-spacing: 0.3px;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.35);
+      line-height: 1.4;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.6s ease 0.32s forwards;
+    }
+    .bio-links {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+      max-width: 320px;
+    }
+    .bio-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 50px;
+      padding: 12px 20px;
+      background: #c16e40;
+      border-radius: 28px;
+      text-decoration: none;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      box-shadow: 0 4px 16px rgba(193, 110, 64, 0.3);
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      opacity: 0;
+      transform: translateY(24px);
+      position: relative;
+      overflow: hidden;
+    }
+    .bio-link:nth-child(1) { animation: fadeUp 0.5s ease 0.42s forwards; }
+    .bio-link:nth-child(2) { animation: fadeUp 0.5s ease 0.49s forwards; }
+    .bio-link:nth-child(3) { animation: fadeUp 0.5s ease 0.56s forwards; }
+    .bio-link:nth-child(4) { animation: fadeUp 0.5s ease 0.63s forwards; }
+    .bio-link:nth-child(5) { animation: fadeUp 0.5s ease 0.70s forwards; }
+    .bio-link:nth-child(6) { animation: fadeUp 0.5s ease 0.77s forwards; }
+    .bio-link:nth-child(7) { animation: fadeUp 0.5s ease 0.84s forwards; }
+    .bio-link:hover {
+      transform: translateY(-3px) scale(1.02);
+      background: #a85c34;
+      box-shadow: 0 8px 28px rgba(193, 110, 64, 0.4);
+    }
+    .bio-link:active { transform: translateY(0) scale(0.98); transition-duration: 0.1s; }
+    .bio-link::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.5s ease;
+    }
+    .bio-link:hover::after { transform: translateX(100%); }
+    .bio-link i { margin-right: 10px; font-size: 1.05rem; }
+    .bio-footer {
+      margin-top: 40px;
+      text-align: center;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.95s forwards;
+    }
+    .bio-footer p {
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+      font-weight: 400;
+      margin: 0;
+    }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 480px) {
+      .bio-container { max-width: 100%; }
+      .avatar-wrapper { width: 150px; height: 150px; }
+      .overlay { top: 25px; }
+      .bio-name { font-size: 24px; }
+      .bio-subtitle { font-size: 12px; }
+      .bio-links { max-width: 280px; }
+      .bio-link { min-height: 46px; font-size: 14px; padding: 10px 18px; }
+    }
+    @media (max-width: 360px) {
+      .avatar-wrapper { width: 130px; height: 130px; }
+      .bio-name { font-size: 22px; }
+      .bio-links { max-width: 260px; }
+      .bio-link { border-radius: 25px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <main class="bio-container">
+    <div class="avatar-wrapper">
+      <div class="avatar-ring"></div>
+      <img src="logo_nexara.png" alt="Nexara IA Studio" class="avatar">
+    </div>
+    <h1 class="bio-name">Nexara IA Studio</h1>
+    <p class="bio-subtitle">Creamos Agentes Inteligentes, automatizaciones y contenido publicitario con modelos UGC.</p>
+    <nav class="bio-links">
+      <a href="#" class="bio-link" target="_blank" rel="noopener">
+        <i class="fas fa-globe"></i><span>Sitio Web</span>
+      </a>
+      <a href="#" class="bio-link" target="_blank" rel="noopener">
+        <i class="fab fa-instagram"></i><span>Instagram</span>
+      </a>
+      <a href="#" class="bio-link" target="_blank" rel="noopener">
+        <i class="fab fa-facebook"></i><span>Facebook</span>
+      </a>
+      <a href="#" class="bio-link" target="_blank" rel="noopener">
+        <i class="fas fa-video"></i><span>Vídeo Demostrativo IA</span>
+      </a>
+      <a href="#" class="bio-link" target="_blank" rel="noopener">
+        <i class="fab fa-tiktok"></i><span>TikTok</span>
+      </a>
+      <a href="#" class="bio-link" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i><span>WhatsApp</span>
+      </a>
+      <a href="#" class="bio-link" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i><span>LinkedIn</span>
+      </a>
+    </nav>
+    <footer class="bio-footer">
+      <p>© 2026 Nexara IA Studio · Todos los derechos reservados</p>
+    </footer>
+  </main>
+</body>
+</html>
