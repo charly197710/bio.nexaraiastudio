@@ -34,7 +34,7 @@
       left: 5mm;
       right: 5mm;
       bottom: 20px;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.55);
       z-index: 1;
       pointer-events: none;
       border-left: 2px solid rgba(255, 255, 255, 0.08);
@@ -77,9 +77,8 @@
       inset: -8px;
       border-radius: 50%;
       border: 3px solid transparent;
-      border-top-color: rgba(255,255,255,0.6);
-      border-right-color: rgba(255,255,255,0.3);
-      animation: ringSpin 4s linear infinite;
+      border-image: conic-gradient(from 0deg, #00f45a, #1e55b4, #00f45a, #1e55b4) 1;
+      animation: ringSpin 3s linear infinite;
     }
     @keyframes ringSpin { to { transform: rotate(360deg); } }
     .bio-name {
@@ -121,7 +120,8 @@
       width: 100%;
       min-height: 50px;
       padding: 12px 20px;
-      background: #c16e40;
+      background: #1e55b4;
+      border: 2px solid #00f45a;
       border-radius: 28px;
       text-decoration: none;
       color: #fff;
@@ -129,7 +129,7 @@
       font-size: 15px;
       font-weight: 600;
       letter-spacing: 0.2px;
-      box-shadow: 0 4px 16px rgba(193, 110, 64, 0.3);
+      box-shadow: 0 4px 16px rgba(30, 85, 180, 0.3);
       transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       opacity: 0;
       transform: translateY(24px);
@@ -145,8 +145,8 @@
     .bio-link:nth-child(7) { animation: fadeUp 0.5s ease 0.84s forwards; }
     .bio-link:hover {
       transform: translateY(-3px) scale(1.02);
-      background: #a85c34;
-      box-shadow: 0 8px 28px rgba(193, 110, 64, 0.4);
+      background: #163f8a;
+      box-shadow: 0 8px 28px rgba(30, 85, 180, 0.4);
     }
     .bio-link:active { transform: translateY(0) scale(0.98); transition-duration: 0.1s; }
     .bio-link::after {
